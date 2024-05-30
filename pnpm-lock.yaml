@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/zen-kaku-gothic-new':
+    specifier: ^5.0.19
+    version: 5.0.19
   '@tanstack/react-router':
     specifier: ^1.32.13
     version: 1.32.13(react-dom@18.3.1)(react@18.3.1)
@@ -362,6 +365,10 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fontsource/zen-kaku-gothic-new@5.0.19:
+    resolution: {integrity: sha512-Dp27ZFZmimmU02OHxXDfXwPDLxQHfFy4lIwG1L/WeU7/dhvIJE3+7AogtgZH7Ya86DIK1GdvWf3ts9lzJZ7beQ==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}

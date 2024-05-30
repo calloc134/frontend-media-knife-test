@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { router } from "./route";
 import { RouterProvider } from "@tanstack/react-router";
 import "./index.css";
+import "@fontsource/zen-kaku-gothic-new/300.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -6,6 +6,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
       // 最も外枠
       display: "flex",
       flexDirection: "column",
+      fontFamily: ["Zen Kaku Gothic New"],
     })}
   >
     <header
@@ -13,8 +14,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
         // ヘッダー
         padding: 2,
         paddingX: 8,
-        bg: "gray.100",
-        gradientFrom: "gray.200",
+        bg: "gray.200",
+
         borderBottomWidth: 2,
         borderRadius: "lg",
       })}
@@ -25,8 +26,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
     <main
       className={css({
         // メインコンテンツ
-
-        padding: 2,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: 4,
       })}
     >
       <div
@@ -37,6 +40,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
           borderRadius: "lg",
           borderWidth: 2,
           padding: 4,
+          width: "90%",
         })}
       >
         {children}
