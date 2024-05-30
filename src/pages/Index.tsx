@@ -35,6 +35,38 @@ export const IndexPage = () => {
     [navigate]
   );
 
+  const handleYtDlp = useCallback(async () => {
+    const url = prompt("YouTubeのURLを入力してください");
+
+    if (!url) {
+      return;
+    }
+
+    const result = await fetch(`${window.location.origin}/yt-dlp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url,
+      }),
+    });
+
+    if (!result.ok) {
+      alert("ダウンロードに失敗しました");
+      return;
+    }
+
+    const { filename } = await result.json();
+
+    navigate({
+      to: "/progress",
+      search: {
+        filename,
+      },
+    });
+  }, [navigate]);
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleUpload,
   });
@@ -53,6 +85,7 @@ export const IndexPage = () => {
         加工したメディアファイルをアップロードしてください。
       </p>
       <div></div>
+
       <div
         {...getRootProps()}
         className={css({
@@ -79,6 +112,19 @@ export const IndexPage = () => {
           <path d="M12 4l0 12" />
         </svg>
       </div>
+      <button
+        onClick={handleYtDlp}
+        className={css({
+          fontSize: "2xl",
+          bg: "indigo.800",
+          borderRadius: "lg",
+          padding: 4,
+          borderWidth: 2,
+          color: "white",
+        })}
+      >
+        YouTubeからダウンロードする場合はこちら
+      </button>
     </div>
   );
 };
