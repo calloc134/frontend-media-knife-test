@@ -1,22 +1,39 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { css } from "../../styled-system/css";
+import { useNavigate } from "@tanstack/react-router";
 
 export const IndexPage = () => {
-  const handleUpload = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
+  const navigate = useNavigate();
+  const handleUpload = useCallback(
+    async (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0];
 
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      await fetch(`${window.location.origin}/upload`, {
-        method: "POST",
-        body: formData,
-      });
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const result = await fetch(`${window.location.origin}/upload`, {
+          method: "POST",
+          body: formData,
+        });
 
-      alert("File uploaded");
-    }
-  }, []);
+        if (!result.ok) {
+          alert("アップロードに失敗しました");
+          return;
+        }
+
+        const { filename } = await result.json();
+
+        navigate({
+          to: "/progress",
+          search: {
+            filename,
+          },
+        });
+      }
+    },
+    [navigate]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleUpload,
