@@ -5,7 +5,8 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { Layout } from "./layout";
-import App from "./App";
+import { IndexPage } from "./pages/Index";
+import { ProgressPage } from "./pages/Process";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -15,14 +16,36 @@ const rootRoute = createRootRoute({
   ),
 });
 
-const uploadRoute = createRoute({
+const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: () => <App />,
+  component: () => <IndexPage />,
+});
+
+const ProgressRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/progress",
+  component: () => <ProgressPage />,
+
+  validateSearch: (
+    search: Record<string, string>
+  ): {
+    filename: string;
+  } => {
+    if (!search.filename) {
+      return {
+        filename: "",
+      };
+    }
+
+    return {
+      filename: search.filename,
+    };
+  },
 });
 
 export const router = createRouter({
-  routeTree: rootRoute.addChildren([uploadRoute]),
+  routeTree: rootRoute.addChildren([indexRoute, ProgressRoute]),
 });
 
 declare module "@tanstack/react-router" {
