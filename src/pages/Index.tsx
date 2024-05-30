@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { css } from "../styled-system/css";
+import { css } from "../../styled-system/css";
 
-function App() {
+export const IndexPage = () => {
   const handleUpload = useCallback(async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
 
@@ -64,6 +64,4 @@ function App() {
       </div>
     </div>
   );
-}
-
-export default App;
+};
