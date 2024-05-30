@@ -27,22 +27,33 @@ function App() {
       className={css({
         display: "flex",
         flexDirection: "column",
-        alignContent: "center",
-        gap: 4,
+        alignItems: "center",
+        gap: 2,
       })}
     >
-      <h1 className={css({ fontSize: "2xl" })}>Media Knife</h1>
-      <div {...getRootProps()}>
+      <h1 className={css({ fontSize: "4xl" })}>Media Knife</h1>
+      <p className={css({ fontSize: "xl" })}>
+        加工したメディアファイルをアップロードしてください。
+      </p>
+      <div></div>
+      <div
+        {...getRootProps()}
+        className={css({
+          borderWidth: 2,
+          borderRadius: "lg",
+          width: 48,
+          height: 48,
+          padding: 12,
+        })}
+      >
         <input {...getInputProps()} />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           // class="icon icon-tabler icon-tabler-upload"
           className={css({
-            width: 24,
-            height: 24,
+            stroke: "#2c3e50",
           })}
           viewBox="0 0 24 24"
-          stroke="#2c3e50"
           fill="none"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
