@@ -111,7 +111,7 @@ export const IndexPage = () => {
       <p className={css({ fontSize: "xl" })}>
         加工したいメディアファイルをアップロードしてください。
       </p>
-      <div></div>
+      <div className={css({ height: 4 })} />
 
       <div
         {...getRootProps()}
