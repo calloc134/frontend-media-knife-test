@@ -80,7 +80,7 @@ export const IndexPage = () => {
     [navigate]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragAccept } = useDropzone({
     onDrop: handleUpload,
   });
 
@@ -106,7 +106,7 @@ export const IndexPage = () => {
           borderRadius: "lg",
           width: 48,
           height: 48,
-          padding: 12,
+          padding: isDragAccept ? 8 : 12,
         })}
       >
         <input {...getInputProps()} />
