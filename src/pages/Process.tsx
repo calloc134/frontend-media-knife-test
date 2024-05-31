@@ -1,21 +1,52 @@
-import { useSearch } from "@tanstack/react-router";
+import { useState } from "react";
+import { useSearch, useNavigate } from "@tanstack/react-router";
 import { css } from "../../styled-system/css";
 import { Button } from "~/components/ui/button";
-import { useNavigate } from "@tanstack/react-router";
+import * as Dialog from "~/components/ui/dialog";
 import * as RadioGroup from "~/components/ui/radio-group";
+import { PropagateLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 export const ProgressPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const param = useSearch({ from: "/progress" });
 
   const navigate = useNavigate();
 
   const options = [
-    { value: "ffmpeg", label: "形式変換" },
+    { value: "ffmpeg_mp3", label: "mp3に変換" },
+    { value: "ffmpeg_wav", label: "wavに変換" },
     { value: "demucs", label: "音源分離" },
     { value: "esrgan", label: "拡大" },
     { value: "segmenration", label: "被写体切り抜き" },
     { value: "whisper", label: "書き起こし" },
   ];
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const process = (event.target as HTMLFormElement).process.value as string;
+    setIsOpen(true);
+
+    const result = await fetch(`${window.location.origin}/process`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        filename: param.filename,
+        process,
+      }),
+    });
+
+    setIsOpen(false);
+
+    if (!result.ok) {
+      toast.error("加工に失敗しました");
+      return;
+    }
+
+    navigate({ to: "/", search: { filename: param.filename } });
+  };
 
   return (
     <div
@@ -33,8 +64,9 @@ export const ProgressPage = () => {
       <div
         className={css({ display: "flex", gap: 2, flexDirection: "column" })}
       >
-        <form>
-          <RadioGroup.Root defaultValue={"ffmpeg"}>
+        <form onSubmit={handleSubmit}>
+          <RadioGroup.Root defaultValue={"ffmpeg_mp3"}>
+            {/* <RadioGroup.Indicator /> */}
             {options.map((option) => (
               <RadioGroup.Item key={option.value} value={option.value}>
                 <RadioGroup.ItemControl />
@@ -54,6 +86,29 @@ export const ProgressPage = () => {
           加工をやめる
         </Button>
       </div>
+      <Dialog.Root open={isOpen}>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <div
+              className={css({
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+
+                padding: 16,
+              })}
+            >
+              <p className={css({ fontSize: "xl" })}>加工を行っています。</p>
+              <p className={css({ fontSize: "xl" })}>
+                このままお待ちください。
+              </p>
+              <div className={css({ height: 16 })} />
+              <PropagateLoader color="#2c3e50" />
+            </div>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
     </div>
   );
 };
