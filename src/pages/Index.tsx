@@ -5,6 +5,7 @@ import { useNavigate } from "@tanstack/react-router";
 import * as Collapsible from "~/components/ui/collapsible";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
+import toast from "react-hot-toast";
 
 export const IndexPage = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const IndexPage = () => {
         });
 
         if (!result.ok) {
-          alert("アップロードに失敗しました");
+          toast.error("アップロードに失敗しました");
           return;
         }
 
@@ -49,7 +50,7 @@ export const IndexPage = () => {
 
       if (!urlPattern.test(url)) {
         // TODO: アラートをコンポーネント化する
-        alert("URLが正しくありません");
+        toast.error("URLが不正です");
         return;
       }
 
@@ -64,7 +65,7 @@ export const IndexPage = () => {
       });
 
       if (!result.ok) {
-        alert("ダウンロードに失敗しました");
+        toast.error("ダウンロードに失敗しました");
         return;
       }
 

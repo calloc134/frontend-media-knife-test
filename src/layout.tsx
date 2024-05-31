@@ -1,4 +1,5 @@
 import { css } from "../styled-system/css";
+import { Toaster } from "react-hot-toast";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => (
   <div
@@ -45,6 +46,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
       >
         {children}
       </div>
+      <Toaster />
     </main>
   </div>
 );
