@@ -2,6 +2,9 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { css } from "../../styled-system/css";
 import { useNavigate } from "@tanstack/react-router";
+import * as Collapsible from "~/components/ui/collapsible";
+import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
 
 export const IndexPage = () => {
   const navigate = useNavigate();
@@ -35,37 +38,47 @@ export const IndexPage = () => {
     [navigate]
   );
 
-  const handleYtDlp = useCallback(async () => {
-    const url = prompt("YouTubeのURLを入力してください");
+  const handleYtDlp = useCallback(
+    async (event: React.FormEvent) => {
+      event.preventDefault();
+      const url = (event.target as HTMLFormElement).url.value as string;
 
-    if (!url) {
-      return;
-    }
+      const urlPattern = new RegExp(
+        /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\/[^\s/$.?#].[^\s]*$/
+      );
 
-    const result = await fetch(`${window.location.origin}/yt-dlp`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        url,
-      }),
-    });
+      if (!urlPattern.test(url)) {
+        // TODO: アラートをコンポーネント化する
+        alert("URLが正しくありません");
+        return;
+      }
 
-    if (!result.ok) {
-      alert("ダウンロードに失敗しました");
-      return;
-    }
+      const result = await fetch(`${window.location.origin}/yt-dlp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url,
+        }),
+      });
 
-    const { filename } = await result.json();
+      if (!result.ok) {
+        alert("ダウンロードに失敗しました");
+        return;
+      }
 
-    navigate({
-      to: "/progress",
-      search: {
-        filename,
-      },
-    });
-  }, [navigate]);
+      const { filename } = await result.json();
+
+      navigate({
+        to: "/progress",
+        search: {
+          filename,
+        },
+      });
+    },
+    [navigate]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleUpload,
@@ -112,19 +125,37 @@ export const IndexPage = () => {
           <path d="M12 4l0 12" />
         </svg>
       </div>
-      <button
-        onClick={handleYtDlp}
-        className={css({
-          fontSize: "2xl",
-          bg: "indigo.800",
-          borderRadius: "lg",
-          padding: 4,
-          borderWidth: 2,
-          color: "white",
-        })}
-      >
-        YouTubeからダウンロードする場合はこちら
-      </button>
+      <Collapsible.Root>
+        <Collapsible.Trigger asChild>
+          <Button size={"2xl"}>YouTubeからダウンロード</Button>
+        </Collapsible.Trigger>
+        <Collapsible.Content>
+          <form
+            className={css({
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            })}
+            onSubmit={handleYtDlp}
+          >
+            <div
+              className={css({
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+              })}
+            >
+              <label className={css({ fontSize: "xl" })}>
+                <span>YouTubeのURL</span>
+              </label>
+              <Input type="text" name="url" />
+            </div>
+            <Button type="submit" size={"2xl"}>
+              ダウンロード
+            </Button>
+          </form>
+        </Collapsible.Content>
+      </Collapsible.Root>
     </div>
   );
 };
