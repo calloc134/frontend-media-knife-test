@@ -1,8 +1,12 @@
 import { useSearch } from "@tanstack/react-router";
 import { css } from "../../styled-system/css";
+import { Button } from "~/components/ui/button";
+import { useNavigate } from "@tanstack/react-router";
 
 export const ProgressPage = () => {
   const param = useSearch({ from: "/progress" });
+
+  const navigate = useNavigate();
 
   return (
     <div
@@ -16,19 +20,16 @@ export const ProgressPage = () => {
       <h1 className={css({ fontSize: "4xl" })}>Media Knife</h1>
       <p className={css({ fontSize: "xl" })}>ファイルの加工を行います。</p>
       <p className={css({ fontSize: "xl" })}>ファイル名: {param.filename}</p>
-
-      <button
-        className={css({
-          fontSize: "2xl",
-          bg: "indigo.800",
-          borderRadius: "lg",
-          padding: 8,
-          borderWidth: 2,
-          color: "white",
-        })}
+      <div className={css({ height: 4 })} />
+      <div
+        className={css({ display: "flex", gap: 2, flexDirection: "column" })}
       >
-        加工を開始
-      </button>
+        <Button size={"2xl"}>加工を開始</Button>
+
+        <Button size={"2xl"} onClick={() => navigate({ to: "/" })}>
+          加工をやめる
+        </Button>
+      </div>
     </div>
   );
 };
