@@ -23,7 +23,7 @@ export const DownloadPage = () => {
 
       <Button
         size={"2xl"}
-        // onClick={() => window.open(`/download/${param.filename}`)}
+        onClick={() => window.open(`/results/${param.filename}`)}
       >
         ダウンロード
       </Button>
