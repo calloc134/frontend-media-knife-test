@@ -1,9 +1,11 @@
 import { Button } from "~/components/ui/button";
 import { css } from "../../styled-system/css";
-import { useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 
 export const DownloadPage = () => {
   const param = useSearch({ from: "/download" });
+
+  const navigate = useNavigate();
 
   return (
     <div
@@ -24,6 +26,10 @@ export const DownloadPage = () => {
         // onClick={() => window.open(`/download/${param.filename}`)}
       >
         ダウンロード
+      </Button>
+
+      <Button size={"2xl"} onClick={() => navigate({ to: "/" })}>
+        ホームに戻る
       </Button>
     </div>
   );
