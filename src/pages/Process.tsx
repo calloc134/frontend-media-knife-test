@@ -48,7 +48,7 @@ export const ProgressPage = () => {
       return;
     }
 
-    navigate({ to: "/", search: { filename: param.filename } });
+    navigate({ to: "/download", search: { filename: param.filename } });
   };
 
   return (
