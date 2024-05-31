@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { css } from "../../styled-system/css";
 import { useNavigate } from "@tanstack/react-router";
@@ -6,8 +6,11 @@ import * as Collapsible from "~/components/ui/collapsible";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import toast from "react-hot-toast";
+import * as Dialog from "~/components/ui/dialog";
 
 export const IndexPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
   const handleUpload = useCallback(
     async (acceptedFiles: File[]) => {
@@ -16,10 +19,15 @@ export const IndexPage = () => {
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
+
+        // TODO: 途中で終了してもダイアログを閉じる
+        setIsOpen(true);
         const result = await fetch(`${window.location.origin}/upload`, {
           method: "POST",
           body: formData,
         });
+
+        setIsOpen(false);
 
         if (!result.ok) {
           toast.error("アップロードに失敗しました");
@@ -54,6 +62,8 @@ export const IndexPage = () => {
         return;
       }
 
+      // TODO: 途中で終了してもダイアログを閉じる
+      setIsOpen(true);
       const result = await fetch(`${window.location.origin}/yt-dlp`, {
         method: "POST",
         headers: {
@@ -63,6 +73,8 @@ export const IndexPage = () => {
           url,
         }),
       });
+
+      setIsOpen(false);
 
       if (!result.ok) {
         toast.error("ダウンロードに失敗しました");
@@ -157,6 +169,14 @@ export const IndexPage = () => {
           </form>
         </Collapsible.Content>
       </Collapsible.Root>
+      <Dialog.Root open={isOpen}>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <p>ダイアログの中身</p>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Dialog.Root>
     </div>
   );
 };
