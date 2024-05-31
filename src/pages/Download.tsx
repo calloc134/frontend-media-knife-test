@@ -21,12 +21,9 @@ export const DownloadPage = () => {
       <p className={css({ fontSize: "xl" })}>ファイル名: {param.filename}</p>
       <div className={css({ height: 4 })} />
 
-      <Button
-        size={"2xl"}
-        onClick={() => window.open(`/results/${param.filename}`)}
-      >
-        ダウンロード
-      </Button>
+      <a href={`./results/${param.filename}`} download={param.filename}>
+        <Button size={"2xl"}>ダウンロード</Button>
+      </a>
 
       <Button size={"2xl"} onClick={() => navigate({ to: "/" })}>
         ホームに戻る
