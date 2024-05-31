@@ -26,6 +26,8 @@ export const ProgressPage = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const process = (event.target as HTMLFormElement).process.value as string;
+
+    // TODO: 途中で終了してもダイアログを閉じる
     setIsOpen(true);
 
     const result = await fetch(`${window.location.origin}/process`, {
