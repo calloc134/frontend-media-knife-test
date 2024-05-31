@@ -4,6 +4,9 @@ export default defineConfig({
   // Whether to use css reset
   preflight: true,
 
+  presets: ["@pandacss/preset-base", "@park-ui/panda-preset"],
+  jsxFramework: "react",
+
   // Where to look for your css declarations
   include: [
     "./src/components/*.{js,jsx,ts,tsx}",
