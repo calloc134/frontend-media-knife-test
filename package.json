@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ark-ui/react": "^3.0.2",
     "@fontsource/zen-kaku-gothic-new": "^5.0.19",
     "@tanstack/react-router": "^1.32.13",
     "react": "^18.2.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^0.39.1",
+    "@park-ui/panda-preset": "^0.37.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
