@@ -6,6 +6,7 @@ import * as Dialog from "~/components/ui/dialog";
 import * as RadioGroup from "~/components/ui/radio-group";
 import { PropagateLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import { RadioGroup as RadioGroupArk } from "@ark-ui/react/radio-group";
 
 export const ProgressPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,12 +66,16 @@ export const ProgressPage = () => {
         className={css({ display: "flex", gap: 2, flexDirection: "column" })}
       >
         <form onSubmit={handleSubmit}>
-          <RadioGroup.Root defaultValue={"ffmpeg_mp3"}>
-            {/* <RadioGroup.Indicator /> */}
+          <RadioGroup.Root defaultValue="ffmpeg_mp3" name="process">
             {options.map((option) => (
-              <RadioGroup.Item key={option.value} value={option.value}>
+              <RadioGroup.Item
+                key={option.value}
+                value={option.value}
+                // disabled={false}
+              >
                 <RadioGroup.ItemControl />
                 <RadioGroup.ItemText>{option.label}</RadioGroup.ItemText>
+                <RadioGroupArk.ItemHiddenInput />
               </RadioGroup.Item>
             ))}
           </RadioGroup.Root>
