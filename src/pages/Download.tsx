@@ -15,9 +15,7 @@ export const DownloadPage = () => {
       })}
     >
       <h1 className={css({ fontSize: "4xl" })}>Media Knife</h1>
-      <p className={css({ fontSize: "xl" })}>
-        ファイルのダウンロードを行います。
-      </p>
+      <p className={css({ fontSize: "xl" })}>加工が完了しました。</p>
       <p className={css({ fontSize: "xl" })}>ファイル名: {param.filename}</p>
       <div className={css({ height: 4 })} />
 
