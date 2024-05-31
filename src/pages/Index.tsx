@@ -96,7 +96,7 @@ export const IndexPage = () => {
     >
       <h1 className={css({ fontSize: "4xl" })}>Media Knife</h1>
       <p className={css({ fontSize: "xl" })}>
-        加工したメディアファイルをアップロードしてください。
+        加工したいメディアファイルをアップロードしてください。
       </p>
       <div></div>
 
