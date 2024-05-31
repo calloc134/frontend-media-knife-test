@@ -179,11 +179,15 @@ export const IndexPage = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 2,
+
                 padding: 16,
               })}
             >
               <p className={css({ fontSize: "xl" })}>通信中です。</p>
+              <p className={css({ fontSize: "xl" })}>
+                このままお待ちください。
+              </p>
+              <div className={css({ height: 16 })} />
               <PropagateLoader color="#2c3e50" />
             </div>
           </Dialog.Content>
