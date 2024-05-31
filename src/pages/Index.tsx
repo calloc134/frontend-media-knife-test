@@ -7,6 +7,7 @@ import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import toast from "react-hot-toast";
 import * as Dialog from "~/components/ui/dialog";
+import { PropagateLoader } from "react-spinners";
 
 export const IndexPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -173,7 +174,18 @@ export const IndexPage = () => {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
-            <p>ダイアログの中身</p>
+            <div
+              className={css({
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+                padding: 16,
+              })}
+            >
+              <p className={css({ fontSize: "xl" })}>通信中です。</p>
+              <PropagateLoader color="#2c3e50" />
+            </div>
           </Dialog.Content>
         </Dialog.Positioner>
       </Dialog.Root>
