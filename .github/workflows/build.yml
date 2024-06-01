@@ -31,3 +31,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release_name: ${{ github.sha }}
           generate_release_notes: true
+          tag_name: ${{ github.sha }}
