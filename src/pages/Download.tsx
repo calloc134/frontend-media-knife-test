@@ -23,7 +23,7 @@ export const DownloadPage = () => {
       <div className={css({ height: 4 })} />
 
       <Button size={"2xl"} onClick={() => window.open(url, "_blank")}>
-        ダウンロード
+        開く
       </Button>
 
       <Button size={"2xl"} onClick={() => navigate({ to: "/" })}>
