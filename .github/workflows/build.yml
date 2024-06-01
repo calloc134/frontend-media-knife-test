@@ -25,6 +25,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: create zip
+        run: zip -r dist.zip dist
+
       - name: create a short SHA
         run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
@@ -32,5 +35,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*
+          files: dist.zip
           tag_name: ${{ env.SHORT_SHA }}
