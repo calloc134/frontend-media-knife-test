@@ -58,7 +58,6 @@ export const IndexPage = () => {
       );
 
       if (!urlPattern.test(url)) {
-        // TODO: アラートをコンポーネント化する
         toast.error("URLが不正です");
         return;
       }
