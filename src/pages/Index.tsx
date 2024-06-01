@@ -159,7 +159,7 @@ export const IndexPage = () => {
               })}
             >
               <label className={css({ fontSize: "xl" })}>
-                <span>YouTubeのURL</span>
+                <span>動画サイトのURL</span>
               </label>
               <Input type="text" name="url" />
             </div>
