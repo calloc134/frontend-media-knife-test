@@ -54,15 +54,11 @@ const DownloadRoute = createRoute({
     search: Record<string, string>
   ): {
     filename: string;
+    url: string;
   } => {
-    if (!search.filename) {
-      return {
-        filename: "",
-      };
-    }
-
     return {
       filename: search.filename,
+      url: search.url,
     };
   },
 });

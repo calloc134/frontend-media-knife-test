@@ -48,9 +48,12 @@ export const ProgressPage = () => {
       return;
     }
 
-    const { filename } = await result.json();
+    const { filename, url } = (await result.json()) as {
+      filename: string;
+      url: string;
+    };
 
-    navigate({ to: "/download", search: { filename } });
+    navigate({ to: "/download", search: { filename, url } });
   };
 
   return (
