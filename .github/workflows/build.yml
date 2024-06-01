@@ -25,8 +25,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: create a short SHA
+        run: echo ::set-env name=SHORT_SHA::$(echo $GITHUB_SHA | cut -c1-7)
+
       # upload as github release
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
+          tag_name: ${{ env.SHORT_SHA }}
