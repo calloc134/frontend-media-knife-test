@@ -140,7 +140,7 @@ export const IndexPage = () => {
       </div>
       <Collapsible.Root>
         <Collapsible.Trigger asChild>
-          <Button size={"2xl"}>YouTubeからダウンロード</Button>
+          <Button size={"2xl"}>動画サイトからダウンロード</Button>
         </Collapsible.Trigger>
         <Collapsible.Content>
           <form
