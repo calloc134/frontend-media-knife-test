@@ -4,7 +4,7 @@
 
 このプロジェクトは以下のリポジトリのフロントエンドです。
 
-[https://colab.research.google.com/github/calloc134/media-knife-colab/blob/master/index.ipynb](https://colab.research.google.com/github/calloc134/media-knife-colab/blob/master/index.ipynb)
+[https://github.com/calloc134/media-knife](https://github.com/calloc134/media-knife)
 
 ## 利用技術
 
