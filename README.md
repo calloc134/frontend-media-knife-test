@@ -1,4 +1,4 @@
-# media knife フロントエンド
+# Media Knife フロントエンド
 
 ## 概要
 
